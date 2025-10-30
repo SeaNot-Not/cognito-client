@@ -38,7 +38,7 @@ const useLoginForm = () => {
         const user = response?.data;
         login(user);
 
-        toast.success("Login successful!", { duration: 4000 });
+        toast.success("Login successful!", { duration: 5000 });
 
         // delay redirection for smooth transition
         setTimeout(() => {
@@ -49,7 +49,7 @@ const useLoginForm = () => {
       },
       onError: (error: HttpResponse) => {
         toast.error(error?.message || "Login failed!", {
-          duration: 3000,
+          duration: 5000,
         });
       },
     });
