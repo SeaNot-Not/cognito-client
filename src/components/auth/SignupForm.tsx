@@ -211,7 +211,11 @@ const SignupForm: React.FC<SignupFormProps> = ({ className, ...props }) => {
           </div>
         </div>
 
-        <div className="flex flex-col gap-1 lg:flex-row lg:justify-end lg:gap-3">
+        <div className="flex flex-col gap-1 lg:flex-row-reverse lg:gap-3">
+          <Button type="submit" disabled={isLoading} className="bg-primary w-full lg:max-w-3xs">
+            {isLoading ? <LoaderCircle className="animate-spin" /> : "Signup"}
+          </Button>
+
           <Button
             variant="outline"
             onClick={() => router.push("/login")}
@@ -219,10 +223,6 @@ const SignupForm: React.FC<SignupFormProps> = ({ className, ...props }) => {
             className="hidden w-full lg:flex lg:max-w-3xs"
           >
             {isLoading ? <LoaderCircle className="animate-spin" /> : "Back to Login"}
-          </Button>
-
-          <Button type="submit" disabled={isLoading} className="bg-primary w-full lg:max-w-3xs">
-            {isLoading ? <LoaderCircle className="animate-spin" /> : "Signup"}
           </Button>
 
           <p className="text-center text-sm lg:hidden">
