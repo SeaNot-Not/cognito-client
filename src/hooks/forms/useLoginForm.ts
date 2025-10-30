@@ -1,14 +1,9 @@
-"use client";
-
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "@/schemas/authSchema";
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
-import useLoginMutation, {
-  LoginCredentials,
-  User,
-} from "@/hooks/mutations/useLoginMutation";
+import useLoginMutation, { LoginCredentials, User } from "@/hooks/mutations/useLoginMutation";
 import useAuthStore from "../stores/useAuthStore";
 import { HttpResponse } from "@/types/response.types";
 
@@ -53,7 +48,7 @@ const useLoginForm = () => {
         reset();
       },
       onError: (error: HttpResponse) => {
-        toast.error(error.message || "Login failed!", {
+        toast.error(error?.message || "Login failed!", {
           duration: 3000,
         });
       },

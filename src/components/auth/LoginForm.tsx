@@ -14,14 +14,27 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import useLoginForm from "@/hooks/forms/useLoginForm";
+import { useRouter } from "next/navigation";
+import useAuthStore from "@/hooks/stores/useAuthStore";
+import { useEffect } from "react";
 
 interface LoginFormProps {
   className?: string;
 }
 
 const LoginForm: React.FC<LoginFormProps> = ({ className, ...props }) => {
-  const { loginForm, control, handleSubmit, isLoading, onSubmit } =
-    useLoginForm();
+  const user = useAuthStore((state) => state.user);
+  const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
+  const router = useRouter();
+
+  const { loginForm, control, handleSubmit, isLoading, onSubmit } = useLoginForm();
+
+  // Check if user is already logged in
+  useEffect(() => {
+    if (user && isLoggedIn) {
+      router.push("/discover");
+    }
+  }, [user, isLoggedIn]);
 
   return (
     <Form {...loginForm}>
@@ -32,9 +45,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ className, ...props }) => {
       >
         <div className="flex flex-col items-center gap-2 text-center">
           <p className="text-foreground text-2xl font-bold">Welcome Back!</p>
-          <p className="text-muted-foreground text-sm">
-            Login and start dating today!
-          </p>
+          <p className="text-muted-foreground text-sm">Login and start dating today!</p>
         </div>
 
         {/* Email Input */}
@@ -45,12 +56,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ className, ...props }) => {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input
-                  type="email"
-                  placeholder="m@example.com"
-                  disabled={isLoading}
-                  {...field}
-                />
+                <Input type="email" placeholder="m@example.com" disabled={isLoading} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -65,12 +71,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ className, ...props }) => {
             <FormItem>
               <FormLabel>Password</FormLabel>
               <FormControl>
-                <Input
-                  type="password"
-                  placeholder="••••••"
-                  disabled={isLoading}
-                  {...field}
-                />
+                <Input type="password" placeholder="••••••" disabled={isLoading} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

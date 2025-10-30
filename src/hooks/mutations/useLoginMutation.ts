@@ -1,5 +1,3 @@
-"use client";
-
 import { useMutation } from "@tanstack/react-query";
 import api from "@/lib/api";
 import { handleApiRequest } from "@/lib/handleApiRequest";
@@ -14,16 +12,13 @@ export interface User {
   _id: string;
   name: string;
   email: string;
+  age: number;
   bio?: string;
   profilePicture?: string;
 }
 
-const loginFunction = (
-  credentials: LoginCredentials
-): Promise<HttpResponse<User>> => {
-  return handleApiRequest(() =>
-    api.post<HttpResponse<User>>("/auth/login", credentials)
-  );
+const loginFunction = (credentials: LoginCredentials): Promise<HttpResponse<User>> => {
+  return handleApiRequest(() => api.post("/auth/login", credentials));
 };
 
 const useLoginMutation = () => {

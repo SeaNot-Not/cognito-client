@@ -8,10 +8,15 @@ interface LogoProps {
 
 const Logo = ({ className }: LogoProps) => {
   return (
-    <div className={cn("size-16 overflow-hidden rounded-full", className)}>
+    <div
+      className={cn(
+        "size-16 overflow-hidden rounded-full shadow-sm",
+        className
+      )}
+    >
       <Image
         src={logo}
-        alt="pd-logo"
+        alt="cognito-logo"
         className="object-cover"
         loading="eager"
       />
