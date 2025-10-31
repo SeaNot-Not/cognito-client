@@ -84,7 +84,7 @@ export default function ChatPage() {
                 onClick={() => setActiveMatchId(m._id)}
               >
                 <Avatar>
-                  <AvatarImage src={other?.profilePicture || ""} />
+                  <AvatarImage src={other?.profileImage || ""} />
                   <AvatarFallback>
                     {other?.name ? other.name.charAt(0).toUpperCase() : "?"}
                   </AvatarFallback>
@@ -107,7 +107,7 @@ export default function ChatPage() {
             const isMe = msg.senderId === currentUser?._id;
             const match = matches.find((m) => m._id === msg.matchId) || matches[0];
             const other = getOtherUser(match);
-            const avatarSrc = isMe ? currentUser?.profilePicture : other?.profilePicture;
+            const avatarSrc = isMe ? currentUser?.profileImage : other?.profileImage;
             const displayName = isMe ? currentUser?.name : other?.name;
             return (
               <div

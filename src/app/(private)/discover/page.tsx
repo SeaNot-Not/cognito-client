@@ -98,8 +98,6 @@ export default function DiscoverPage() {
   const [queue, setQueue] = useState<User[]>(initialQueue);
   const user = queue[0] || null;
 
-  console.log("USERRRR", user);
-
   const { mutate: likeUser, isPending: liking } = useLikeUserMutation();
   const { mutate: skipUser, isPending: skipping } = useSkipUserMutation();
 

@@ -3,7 +3,7 @@ export interface BasicUser {
   name: string;
   age?: number;
   bio?: string;
-  profilePicture?: string;
+  profileImage?: string;
 }
 
 export interface MatchItem {
@@ -14,5 +14,3 @@ export interface MatchItem {
   createdAt?: string;
   updatedAt?: string;
 }
-
-
