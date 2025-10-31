@@ -48,7 +48,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ className, ...props }) => {
   // Check if user is already logged in
   useEffect(() => {
     if (user && isLoggedIn) {
-      router.push("/discover");
+      router.push("/chat");
     }
   }, [user, isLoggedIn]);
 
@@ -115,12 +115,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ className, ...props }) => {
                 <FormItem>
                   <FormLabel>Name</FormLabel>
                   <FormControl>
-                    <Input
-                      type="text"
-                      placeholder="Pedro Pandesal"
-                      disabled={isLoading}
-                      {...field}
-                    />
+                    <Input type="text" placeholder="Your name" disabled={isLoading} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -153,7 +148,11 @@ const SignupForm: React.FC<SignupFormProps> = ({ className, ...props }) => {
                 <FormItem>
                   <FormLabel>Bio</FormLabel>
                   <FormControl>
-                    <Textarea placeholder="I'm Pedro Pandesal..." {...field} disabled={isLoading} />
+                    <Textarea
+                      placeholder="Tell us about yourself"
+                      {...field}
+                      disabled={isLoading}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -222,7 +221,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ className, ...props }) => {
             disabled={isLoading}
             className="hidden w-full lg:flex lg:max-w-3xs"
           >
-            {isLoading ? <LoaderCircle className="animate-spin" /> : "Back to Login"}
+            Back to Login
           </Button>
 
           <p className="text-center text-sm lg:hidden">

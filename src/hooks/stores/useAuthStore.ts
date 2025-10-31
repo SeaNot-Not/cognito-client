@@ -1,35 +1,30 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { CurrentUser } from "../queries/useCurrentUser";
 
-type User = {
-  _id: string;
-  name: string;
-  email: string;
-  bio?: string;
-  profilePicture?: string;
-};
-
-interface AuthStore {
-  user: User | null;
+interface AuthState {
+  user: CurrentUser | null;
   isLoggedIn: boolean;
-  login: (user: User) => void;
+  setUserDetails: (user: CurrentUser | null) => void;
+  setIsLoggedIn: (value: boolean) => void;
   logout: () => void;
 }
 
 const useAuthStore = create(
-  persist<AuthStore>(
+  persist<AuthState>(
     (set) => ({
       user: null,
       isLoggedIn: false,
 
-      login: (user) => set({ user, isLoggedIn: true }),
+      setUserDetails: (user) => set({ user }),
+      setIsLoggedIn: (value) => set({ isLoggedIn: value }),
       logout: () => set({ user: null, isLoggedIn: false }),
     }),
 
     {
       name: "cognito-auth-storage",
-    }
-  )
+    },
+  ),
 );
 
 export default useAuthStore;

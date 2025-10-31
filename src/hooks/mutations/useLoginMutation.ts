@@ -14,7 +14,7 @@ export interface User {
   email: string;
   age: number;
   bio?: string;
-  profilePicture?: string;
+  profileImage?: string;
 }
 
 const loginFunction = (credentials: LoginCredentials): Promise<HttpResponse<User>> => {

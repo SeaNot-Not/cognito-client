@@ -61,23 +61,23 @@ const useSignupForm = () => {
         {
           onSuccess: (response: HttpResponse<User>) => {
             console.log(response);
-            toast.success("Signup successful, please login!", { duration: 5000 });
+            toast.success("Signup successful, please login!", { duration: 4000 });
 
             // delay redirection for smooth transition
             setTimeout(() => {
               router.push("/login");
-            }, 3000);
+            }, 300);
 
             reset();
           },
           onError: (error: any) => {
             console.error(error);
-            toast.error(error?.message || "Signup Failed! Please try again.", { duration: 5000 });
+            toast.error(error?.message || "Signup Failed! Please try again.", { duration: 4000 });
           },
         },
       );
     } catch (error: any) {
-      toast.error(error?.message || "Upload failed. Please try again.", { duration: 5000 });
+      toast.error(error?.message || "Upload failed. Please try again.", { duration: 4000 });
     }
   };
 

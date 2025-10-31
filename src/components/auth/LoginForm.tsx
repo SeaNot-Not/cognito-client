@@ -32,7 +32,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ className, ...props }) => {
   // Check if user is already logged in
   useEffect(() => {
     if (user && isLoggedIn) {
-      router.push("/discover");
+      router.push("/chat");
     }
   }, [user, isLoggedIn]);
 

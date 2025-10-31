@@ -5,10 +5,8 @@ const BASE_URL =
     ? process.env.NEXT_PUBLIC_API_URL_PROD
     : process.env.NEXT_PUBLIC_API_URL_DEV;
 
-console.log(BASE_URL);
-
 const api = axios.create({
-  baseURL: BASE_URL,
+  baseURL: `${BASE_URL}/api`,
   withCredentials: true,
 });
 
