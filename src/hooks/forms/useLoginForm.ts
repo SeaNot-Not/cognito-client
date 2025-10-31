@@ -10,7 +10,7 @@ import { HttpResponse } from "@/types/response.types";
 export interface LoginFormValues extends LoginCredentials {}
 
 const useLoginForm = () => {
-  const login = useAuthStore((state) => state.login);
+  const setIsLoggedIn = useAuthStore((state) => state.setIsLoggedIn);
   const router = useRouter();
 
   const { mutate, isPending } = useLoginMutation();
@@ -34,22 +34,20 @@ const useLoginForm = () => {
   const onSubmit = async (data: LoginFormValues) => {
     mutate(data, {
       onSuccess: (response: HttpResponse<User>) => {
-        // store user in auth store
-        const user = response?.data;
-        login(user);
+        toast.success("Login successful!", { duration: 4000 });
 
-        toast.success("Login successful!", { duration: 5000 });
+        // Set isLoggedIn to true
+        setIsLoggedIn(true);
 
-        // delay redirection for smooth transition
         setTimeout(() => {
-          router.push("/discover");
-        }, 3000);
+          router.push("/chat");
+        }, 300);
 
         reset();
       },
       onError: (error: HttpResponse) => {
         toast.error(error?.message || "Login failed!", {
-          duration: 5000,
+          duration: 4000,
         });
       },
     });

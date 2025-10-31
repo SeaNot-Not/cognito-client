@@ -48,7 +48,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ className, ...props }) => {
   // Check if user is already logged in
   useEffect(() => {
     if (user && isLoggedIn) {
-      router.push("/discover");
+      router.push("/chat");
     }
   }, [user, isLoggedIn]);
 
@@ -115,12 +115,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ className, ...props }) => {
                 <FormItem>
                   <FormLabel>Name</FormLabel>
                   <FormControl>
-                    <Input
-                      type="text"
-                      placeholder="Pedro Pandesal"
-                      disabled={isLoading}
-                      {...field}
-                    />
+                    <Input type="text" placeholder="Your name" disabled={isLoading} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -153,7 +148,11 @@ const SignupForm: React.FC<SignupFormProps> = ({ className, ...props }) => {
                 <FormItem>
                   <FormLabel>Bio</FormLabel>
                   <FormControl>
-                    <Textarea placeholder="I'm Pedro Pandesal..." {...field} disabled={isLoading} />
+                    <Textarea
+                      placeholder="Tell us about yourself"
+                      {...field}
+                      disabled={isLoading}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -211,18 +210,18 @@ const SignupForm: React.FC<SignupFormProps> = ({ className, ...props }) => {
           </div>
         </div>
 
-        <div className="flex flex-col gap-1 lg:flex-row lg:justify-end lg:gap-3">
+        <div className="flex flex-col gap-1 lg:flex-row-reverse lg:gap-3">
+          <Button type="submit" disabled={isLoading} className="bg-primary w-full lg:max-w-3xs">
+            {isLoading ? <LoaderCircle className="animate-spin" /> : "Signup"}
+          </Button>
+
           <Button
             variant="outline"
             onClick={() => router.push("/login")}
             disabled={isLoading}
             className="hidden w-full lg:flex lg:max-w-3xs"
           >
-            {isLoading ? <LoaderCircle className="animate-spin" /> : "Back to Login"}
-          </Button>
-
-          <Button type="submit" disabled={isLoading} className="bg-primary w-full lg:max-w-3xs">
-            {isLoading ? <LoaderCircle className="animate-spin" /> : "Signup"}
+            Back to Login
           </Button>
 
           <p className="text-center text-sm lg:hidden">
