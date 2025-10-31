@@ -12,7 +12,7 @@ const HeaderNavLinks: React.FC = () => {
   ];
 
   return (
-    <nav className="hidden items-center gap-10 sm:flex">
+    <nav className="hidden items-center gap-10 lg:flex">
       {links.map((link) => {
         const isActive = pathname === link.href;
         return (

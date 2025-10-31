@@ -18,7 +18,7 @@ const Header: React.FC = () => {
         <div className="flex items-center">
           <div className="flex items-center gap-5 sm:gap-10">
             <HeaderNavLinks />
-            <ToggleThemeIconButton className="hidden sm:block" />
+            <ToggleThemeIconButton className="hidden lg:block" />
             <HeaderUserAvatar />
           </div>
 

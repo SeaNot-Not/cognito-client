@@ -73,7 +73,7 @@ const HeaderSheet: React.FC = () => {
       <SheetDescription />
 
       <SheetTrigger asChild>
-        <Button className="p-0! shadow-none transition-opacity hover:opacity-80 sm:hidden">
+        <Button className="p-0! shadow-none transition-opacity hover:opacity-80 lg:hidden">
           <Menu className="size-10 text-white" />
         </Button>
       </SheetTrigger>
