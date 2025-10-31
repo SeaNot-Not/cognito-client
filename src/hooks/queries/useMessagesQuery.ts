@@ -6,10 +6,14 @@ import { MessageItem } from "@/types/message.types";
 
 type MessagesResponse = HttpResponse<{
   items: MessageItem[];
-  meta: CursorPaginationMeta;
+  pagination: CursorPaginationMeta;
 }>;
 
-const fetchMessages = (matchId: string, cursor?: string, limit: number = 20): Promise<MessagesResponse> => {
+const fetchMessages = (
+  matchId: string,
+  cursor?: string,
+  limit: number = 20,
+): Promise<MessagesResponse> => {
   const params = new URLSearchParams();
   if (cursor) params.set("cursor", cursor);
   if (limit) params.set("limit", String(limit));
@@ -25,5 +29,3 @@ const useMessagesQuery = (matchId?: string) => {
 };
 
 export default useMessagesQuery;
-
-

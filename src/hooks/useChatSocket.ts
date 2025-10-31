@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { io, Socket } from "socket.io-client";
 import { MessageItem } from "@/types/message.types";
 
@@ -25,11 +25,20 @@ export default function useChatSocket({ matchId, onReceive }: UseChatSocketOptio
     return singletonSocket;
   }, []);
 
+  // track the last joined room so we can leave it when matchId changes
+  const lastRoomRef = useRef<string | null>(null);
+
   useEffect(() => {
     if (!socket) return;
 
+    // leave previous room if different
+    if (lastRoomRef.current && lastRoomRef.current !== matchId) {
+      socket.emit("leave_match_room", lastRoomRef.current);
+    }
+
     if (matchId) {
       socket.emit("join_match_room", matchId);
+      lastRoomRef.current = matchId;
     }
 
     const handler = (payload: { success: boolean; data?: MessageItem }) => {
@@ -40,6 +49,11 @@ export default function useChatSocket({ matchId, onReceive }: UseChatSocketOptio
 
     return () => {
       socket.off("receive_message", handler);
+      // when component unmounts, leave the last joined room
+      if (lastRoomRef.current) {
+        socket.emit("leave_match_room", lastRoomRef.current);
+        lastRoomRef.current = null;
+      }
     };
   }, [socket, matchId, onReceive]);
 
