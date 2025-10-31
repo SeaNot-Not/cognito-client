@@ -10,7 +10,7 @@ import useAuthStore from "@/hooks/stores/useAuthStore";
 
 const useUpdateUserForm = () => {
   const user = useAuthStore((s) => s.user);
-  const setLogin = useAuthStore((s) => s.login);
+  const setUserDetails = useAuthStore((s) => s.setUserDetails);
   const { mutate, isPending } = useUpdateUserMutation();
 
   const updateForm = useForm<UpdateUserFormValues>({
@@ -52,7 +52,7 @@ const useUpdateUserForm = () => {
         {
           onSuccess: (res) => {
             const updated = res?.data;
-            if (updated) setLogin({ ...(user as any), ...updated });
+            if (updated) setUserDetails({ ...(user as any), ...updated });
             toast.success("Profile updated successfully!", { duration: 4000 });
             reset(updated);
           },
